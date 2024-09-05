@@ -29,7 +29,7 @@ class Post
     private ?string $image = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $CreatedAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     private ?bool $isPublished = null;
@@ -111,12 +111,12 @@ class Post
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->CreatedAt;
+        return $this->createdAt;
     }
 
     public function setCreatedAt(\DateTimeImmutable $CreatedAt): static
     {
-        $this->CreatedAt = $CreatedAt;
+        $this->createdAt = $CreatedAt;
 
         return $this;
     }
