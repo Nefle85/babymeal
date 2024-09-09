@@ -42,3 +42,14 @@ body{
     padding-left: 15px;
     padding-right: 15px;
 }
+
+/*Style de la page "actu"*/
+
+.background-image {
+    background-image: url('/divers/images/motif.jpg');
+    background-size: cover; /* Ajuste l'image pour couvrir toute la div */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    padding: 20px; /* Ajoute un peu d'espace intérieur si nécessaire */
+    border-radius: 10px; /* Optionnel : ajoute des coins arrondis */
+}

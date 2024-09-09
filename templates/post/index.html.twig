@@ -1,0 +1,40 @@
+{# templates/article/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div> <!-- Left empty col for centering -->
+        <div class="col-8 background-image">
+            {% for post in pagination %}
+                <div class="card mb-4 mt-4">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text"><small class="text-muted">Publié le {{ post.createdAt|date('d/m/Y') }}</small></p>
+                                <p class="card-text">Rubrique: {{ post.rubrik.name }}</p>
+                                <p class="card-text">{{ post.abstract }}</p>
+                                <p class="card-text">{{ post.content }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            {% if post.image %}
+                                <img src="{{ asset('divers/images/' ~ post.image) }}" class="img-fluid rounded-start" alt="{{ post.title }}">
+                            {% else %}
+                                <img src="{{ asset('images/default.jpg') }}" class="img-fluid rounded-start" alt="Default image">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucun article trouvé.</p>
+            {% endfor %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+        <div class="col-2"></div> <!-- Right empty col for centering -->
+    </div>
+</div>
+{% endblock %}
