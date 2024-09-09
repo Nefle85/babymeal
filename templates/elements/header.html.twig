@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ path('app_main') }}" style="color:white;">BABIMEAL</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('app_main') }}" style="color:white;">
+            <i class="fa fa-home" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link menu" href="#" style="color:black;">LA CARTE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link events" href="#" style="color:black;">L'ACTU</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link team" href="#" style="color:black;">L'EQUIPE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link contact" href="{{ path('app_contact') }}" style="color:black;">CONTACTEZ-NOUS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link dashboard" href="{{ path('admin') }}" style="color:black;">DASHBOARD</a>
+        </li>
+      </ul>
+
+      <div class="header-social-links ms-auto">
+        {% if app.user %}
+          {% if app.user.opption is same as ('yes') %}
+            {% if app.user.avatar is empty %}
+              <i class="fa-solid fa-circle-user" style="color: black"></i>
+              <span class="zxfirstname">{{ app.user.firstname|capitalize }}</span>
+              <span class="zxlastname">{{ app.user.lastname|upper }}</span>
+              <a class="loggouts mr-2" href="{{ path('app_logout') }}">
+                <i class="fa solid fa-power-off" style="color: black"></i>
+              </a>
+              <a class="zxadmin mr-2" href="{{ path('admin') }}">
+                <i class="fa fa-circle-play" style="color: black"></i>
+              </a>
+            {% else %}
+              <img class="roundedImage" src="{{ asset('divers/avatars/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
+              <span class="zxfirstname">{{ app.user.firstname|capitalize }}</span>
+              <span class="zxlastname">{{ app.user.lastname|upper }}</span>
+              <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: black"></i></a>
+              <a class="zxadmin mr-2" href="{{ path('admin') }}">
+                <i class="fa fa-circle-play" style="color: black"></i>
+              </a>
+            {% endif %}
+          {% else %}
+            {% if app.user.avatar is empty %}
+              <i class="fa-solid fa-circle-user" style="color: black"></i>
+              <span class="zxfirstname">{{ app.user.firstname|capitalize }}</span>
+              <span class="zxlastname">{{ app.user.lastname|upper }}</span>
+              <a class="loggouts mr-2" href="{{ path('app_logout') }}">
+                <i class="fa solid fa-power-off" style="color: black"></i>
+              </a>
+            {% else %}
+              <img class="roundedImage" src="{{ asset('divers/avatars/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
+              <span class="zxfirstname">{{ app.user.firstname|capitalize }}</span>
+              <span class="zxlastname">{{ app.user.lastname|upper }}</span>
+              <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: black"></i></a>
+            {% endif %}
+          {% endif %}
+        {% else %}
+          <a class="login" href="{{ path('app_login') }}">
+            <i class="fa-regular fa-circle-user" style="color: black"></i>&ensp;
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

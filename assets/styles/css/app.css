@@ -1,0 +1,44 @@
+/* public/css/app.css */
+
+body{
+    background-color: black;
+}
+
+.presentation{
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Style pour les images du carrousel */
+.carousel-image {
+    max-height: 500px; /* Hauteur maximale du carrousel */
+    object-fit: cover; /* Pour s'assurer que les images restent proportionnelles et centrées */
+}
+
+.carousel-inner {
+    max-height: 500px; /* Limite également la hauteur du conteneur du carrousel */
+}
+
+/* Conteneur global pour la page */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Alignement du texte de bienvenue */
+.welcome-text {
+    font-size: 1.5em;
+    margin: 20px;
+    text-align: left; /* Aligne le texte à gauche */
+}
+
+/* Ajustement des marges pour centrer le contenu */
+.custom-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
