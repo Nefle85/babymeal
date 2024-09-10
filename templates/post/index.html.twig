@@ -1,10 +1,10 @@
-{# templates/article/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block body %}
 <div class="container">
     <div class="row">
         <div class="col-2"></div> <!-- Left empty col for centering -->
+
         <div class="col-8 background-image">
             {% for post in pagination %}
                 <div class="card mb-4 mt-4">
@@ -13,9 +13,60 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ post.title }}</h5>
                                 <p class="card-text"><small class="text-muted">Publié le {{ post.createdAt|date('d/m/Y') }}</small></p>
-                                <p class="card-text">Rubrique: {{ post.rubrik.name }}</p>
                                 <p class="card-text">{{ post.abstract }}</p>
                                 <p class="card-text">{{ post.content }}</p>
+
+                                {# Section de commentaires #}
+                                <div class="row">
+                                    {% if post.comment|length < 1 %}
+                                        <p>Il n'y a pas encore de commentaires pour ce post. Soyez le premier à commenter...</p>
+                                    {% else %}
+                                        <p>{{ post.comment|length }} Commentaire(s)</p>
+                                    {% endif %}
+                                </div>
+
+                                {# Formulaire de commentaire pour le post actuel #}
+                                <div class="row mb-5">
+                                    {% if app.user %}
+                                        <button id="toggle-comment-form-{{ post.id }}" class="btn btn-lg btn-dark mb-3 mt-4">
+                                            Ajouter un commentaire
+                                        </button>
+                                        <div id="comment-form-container-{{ post.id }}" style="display: none;">
+                                            {{ form_start(comment_forms[post.id]) }}
+                                            {{ form_widget(comment_forms[post.id].content) }}
+                                            {{ form_errors(comment_forms[post.id].content) }}
+                                            {{ form_widget(comment_forms[post.id].save) }}
+                                            {{ form_end(comment_forms[post.id]) }}
+                                        </div>
+                                    {% else %}
+                                        <p><a href="{{ path('app_login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
+                                    {% endif %}
+                                </div>
+
+                                {# Affichage des commentaires pour le post actuel #}
+                                <div class="row">
+                                    <button id="toggle-comments-{{ post.id }}" class="btn btn-lg btn-primary mb-3">
+                                        Lire le(s) commentaire(s)
+                                    </button>
+                                    <div id="comments-container-{{ post.id }}" style="display: none;">
+                                        {% for comment in post.comment %}
+                                            <div class="comment mb-3">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        {# Vérification de l'avatar, sinon utiliser un avatar par défaut #}
+                                                        <img class="img-fluid imgkx" src="{{ comment.user.avatar ? asset('divers/avatars/' ~ comment.user.avatar) : asset('divers/avatars/cindy.jpg') }}" alt="avatar"/>
+                                                    </div>
+                                                    <div class="col-md-8 pt-2 userName">{{ comment.user.firstname|capitalize }}</div>
+                                                    <div class="col-md-2 text-end">{{ comment.createdAt|date('d/m/Y') }}</div>
+                                                </div>
+                                                <div class="col-md-12" style="padding-left:75px;font-size:1.3em;">
+                                                    {{ comment.content|capitalize }}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -30,11 +81,32 @@
             {% else %}
                 <p>Aucun article trouvé.</p>
             {% endfor %}
+
             <div class="pagination">
                 {{ knp_pagination_render(pagination) }}
             </div>
         </div>
+
         <div class="col-2"></div> <!-- Right empty col for centering -->
     </div>
 </div>
+
+<script>
+    document.querySelectorAll('[id^="toggle-comment-form-"]').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.id.split('-').pop();
+            var formContainer = document.getElementById('comment-form-container-' + id);
+            formContainer.style.display = formContainer.style.display === 'none' || formContainer.style.display === '' ? 'block' : 'none';
+        });
+    });
+
+    document.querySelectorAll('[id^="toggle-comments-"]').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.id.split('-').pop();
+            var commentsContainer = document.getElementById('comments-container-' + id);
+            commentsContainer.style.display = commentsContainer.style.display === 'none' || commentsContainer.style.display === '' ? 'block' : 'none';
+        });
+    });
+</script>
+
 {% endblock %}
