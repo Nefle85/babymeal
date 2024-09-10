@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo; // cf. mise en place du slug
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -34,8 +35,15 @@ class Post
     #[ORM\Column]
     private ?bool $isPublished = null;
 
-    #[ORM\Column(length: 128)]
+
+    
+    //Mise en place du slug
+    #[Gedmo\Slug(fields: ['title'])]
+    #[ORM\Column(length: 128, unique:true)]
     private ?string $slug = null;
+
+
+
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
@@ -51,10 +59,21 @@ class Post
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'post', orphanRemoval: true)]
     private Collection $comment;
 
+
+    
+    //Très important : permet à la date de s'implémenter automatiquement sinon erreur
+    //"An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation:
+    //1048 Le champ 'created_at' ne peut être vide (null)""
+
     public function __construct()
     {
         $this->comment = new ArrayCollection();
+        // Initialise la date de création à la date actuelle
+        $this->createdAt = new \DateTimeImmutable();
     }
+
+
+
 
     public function getId(): ?int
     {
@@ -114,19 +133,19 @@ class Post
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $CreatedAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->createdAt = $CreatedAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function isPublished(): ?bool
+    public function getIsPublished(): ?bool
     {
         return $this->isPublished;
     }
 
-    public function setPublished(bool $isPublished): static
+    public function setIsPublished(bool $isPublished): static
     {
         $this->isPublished = $isPublished;
 

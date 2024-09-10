@@ -56,13 +56,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Post>
      */
-    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'user', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'user')]
     private Collection $posts;
 
     /**
      * @var Collection<int, Comment>
      */
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user', )]
     private Collection $comment;
 
     public function __construct()
@@ -70,6 +70,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->posts = new ArrayCollection();
         $this->comment = new ArrayCollection();
     }
+
+
+    /*Retourne une représentation sous forme de chaîne de l'objet User.*/
+    //Si je ne rajoute pas cette fonction, le chap "user" de mon Post Formulaire sera renseigné "user" par défaut
+    //de ce fait, je ne pourrais pas utiliser "isPublished" qui requiert d'être "admin"
+
+    public function __toString()
+    {
+        return $this->firstname;  // Retourne le nom ou une chaîne par défaut si le nom est null//rajouter le nom de famille
+    }
+
+
+    
 
     public function getId(): ?int
     {
@@ -278,13 +291,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-        /**
-     * Retourne une représentation sous forme de chaîne de l'objet User.
-     */
-    public function __toString(): string
-    {
-        return $this->name ?? 'User'; // Retourne le nom ou une chaîne par défaut si le nom est null
-    }
 }
 
 
