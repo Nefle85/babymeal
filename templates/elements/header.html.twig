@@ -1,75 +1,59 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #333; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ path('app_main') }}" style="color:white;">BABIMEAL</a>
+    <!-- Logo & Nom du restaurant -->
+    <a class="navbar-brand" href="{{ path('app_main') }}" style="color: orange; font-weight: bold;">
+      <img src="{{ asset('divers/images/logo2.jpg') }}" alt="BABIMEAL Logo" style="width: 80px; margin: 0px 10px;">
+      RESTO AFRO-EXOTIQUE
+    </a>
 
+    <!-- Toggler pour mobile -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon" style="color: orange;"></span>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
-      <ul class="navbar-nav mb-2 mb-lg-0">
+    <!-- Liens de navigation -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto" style="gap: 30px;">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('app_main') }}" style="color:white;">
-            <i class="fa fa-home" aria-hidden="true"></i>
+          <a class="nav-link" href="{{ path('app_main') }}" style="color: white; font-weight: bold;">
+            <i class="fa fa-home"></i>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link menu" href="#" style="color:black;">LA CARTE</a>
+          <a class="nav-link" href="{{ path('app_menu') }}" style="color: orange; font-weight: bold;">LA CARTE</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link events" href="{{ path('app_post') }}" style="color:black;">L'ACTU</a>
+          <a class="nav-link" href="{{ path('app_post') }}" style="color: orange; font-weight: bold;">L'ACTU</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link team" href="{{ path('app_team') }}" style="color:black;">L'EQUIPE</a>
+          <a class="nav-link" href="{{ path('app_team') }}" style="color: orange; font-weight: bold;">L'EQUIPE</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link contact" href="{{ path('app_contact') }}" style="color:black;">CONTACTEZ-NOUS</a>
+          <a class="nav-link" href="{{ path('app_contact') }}" style="color: orange; font-weight: bold;">CONTACTEZ-NOUS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link dashboard" href="{{ path('admin') }}" style="color:black;">DASHBOARD</a>
+          <a class="nav-link" href="{{ path('admin') }}" style="color: orange; font-weight: bold;">DASHBOARD</a>
         </li>
       </ul>
 
-      <div class="header-social-links ms-auto">
+      <!-- Social et utilisateur -->
+      <div class="header-social-links d-flex align-items-center ms-auto">
         {% if app.user %}
-          {% if app.user.opption is same as ('yes') %}
+          <div class="d-flex align-items-center">
             {% if app.user.avatar is empty %}
-              <i class="fa-solid fa-circle-user" style="color: black"></i>
-              <span class="zxfirstname">{{ app.user.firstname|capitalize }}</span>
-              <span class="zxlastname">{{ app.user.lastname|upper }}</span>
-              <a class="loggouts mr-2" href="{{ path('app_logout') }}">
-                <i class="fa solid fa-power-off" style="color: black"></i>
-              </a>
-              <a class="zxadmin mr-2" href="{{ path('admin') }}">
-                <i class="fa fa-circle-play" style="color: black"></i>
-              </a>
+              <i class="fa-solid fa-circle-user" style="color: white;"></i>
             {% else %}
-              <img class="roundedImage" src="{{ asset('divers/avatars/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
-              <span class="zxfirstname">{{ app.user.firstname|capitalize }}</span>
-              <span class="zxlastname">{{ app.user.lastname|upper }}</span>
-              <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: black"></i></a>
-              <a class="zxadmin mr-2" href="{{ path('admin') }}">
-                <i class="fa fa-circle-play" style="color: black"></i>
-              </a>
+              <img class="rounded-circle" src="{{ asset('divers/avatars/' ~ app.user.avatar) }}" alt="User Avatar" style="width: 30px; height: 30px; border: 2px solid orange; margin-right: 10px;">
             {% endif %}
-          {% else %}
-            {% if app.user.avatar is empty %}
-              <i class="fa-solid fa-circle-user" style="color: black"></i>
-              <span class="zxfirstname">{{ app.user.firstname|capitalize }}</span>
-              <span class="zxlastname">{{ app.user.lastname|upper }}</span>
-              <a class="loggouts mr-2" href="{{ path('app_logout') }}">
-                <i class="fa solid fa-power-off" style="color: black"></i>
-              </a>
-            {% else %}
-              <img class="roundedImage" src="{{ asset('divers/avatars/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
-              <span class="zxfirstname">{{ app.user.firstname|capitalize }}</span>
-              <span class="zxlastname">{{ app.user.lastname|upper }}</span>
-              <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: black"></i></a>
-            {% endif %}
-          {% endif %}
+            <span class="zxfirstname" style="color: white;">{{ app.user.firstname|capitalize }}</span>
+            <span class="zxlastname" style="color: orange; font-weight: bold; text-transform: uppercase;">{{ app.user.lastname }}</span>
+            <a class="loggouts ms-3" href="{{ path('app_logout') }}">
+              <i class="fa-solid fa-power-off" style="color: orange;"></i>
+            </a>
+          </div>
         {% else %}
-          <a class="login" href="{{ path('app_login') }}">
-            <i class="fa-regular fa-circle-user" style="color: black"></i>&ensp;
+          <a class="login" href="{{ path('app_login') }}" style="color: white;">
+            <i class="fa-regular fa-circle-user"></i>&ensp;Se connecter
           </a>
         {% endif %}
       </div>

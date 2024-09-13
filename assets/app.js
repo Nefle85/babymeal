@@ -10,5 +10,8 @@ import './styles/css/header.css';
 import './styles/css/footer.css';
 import './styles/css/post.css';
 import './styles/css/team.css';
+import './styles/css/menu.css';
+import './styles/css/contact.css';
+
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

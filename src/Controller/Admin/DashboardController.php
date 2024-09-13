@@ -2,9 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Contact;
 use App\Entity\Post;
+use App\Entity\Product;
 use App\Entity\Rubrik;
 use App\Entity\User;
 use App\Form\MenuUploadType;
@@ -118,6 +120,18 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::submenu('Rubriks','fa-solid-book-open-reader')->setSubItems([
                 MenuItem::linkToCrud('Create Rubrik','fas fa-newspaper', Rubrik::class)->setAction(Crud::PAGE_NEW),
                 MenuItem::linkToCrud('Show Rubrik','fas fa-eye', Rubrik::class),  
+                ]);
+            
+            yield MenuItem::section('Product');
+            yield MenuItem::submenu('Products','fa-solid-book-open-reader')->setSubItems([
+                MenuItem::linkToCrud('Create Product','fas fa-newspaper', Product::class)->setAction(Crud::PAGE_NEW),
+                MenuItem::linkToCrud('Show Product','fas fa-eye', Product::class),  
+                ]);
+
+            yield MenuItem::section('Category');
+            yield MenuItem::submenu('Categories','fa-solid-book-open-reader')->setSubItems([
+                MenuItem::linkToCrud('Create Category','fas fa-newspaper', Category::class)->setAction(Crud::PAGE_NEW),
+                MenuItem::linkToCrud('Show Category','fas fa-eye', Category::class),  
                 ]);
             
             yield MenuItem::section('Contact');

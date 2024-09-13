@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurant - La Carte{% endblock %}
+
+{% block body %}
+<div class="menu-container">
+    <h1 class="menu-title">La Carte</h1>
+    
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-md-12 category-section">
+                <h2 class="category-title">{{ category.name }}</h2>
+                <div class="row">
+                    {% for product in category.products %}
+                        <div class="col-md-4">
+                            <div class="card product-card">
+                                {% if product.image %}
+                                    <img src="{{ asset('divers/images/' ~ product.image) }}" class="card-img-top product-image" alt="{{ product.name }}">
+                                {% else %}
+                                    <img src="{{ asset('images/placeholder.png') }}" class="card-img-top product-image" alt="Image non disponible">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h3 class="product-name">{{ product.name }}</h3>
+                                    <p class="product-description">{{ product.description }}</p>
+                                    <p class="product-price">{{ product.price }} €</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

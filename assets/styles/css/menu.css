@@ -1,0 +1,62 @@
+.menu-container {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 40px 20px;
+    font-family: 'Arial', sans-serif; /* Ajuster en fonction du style du restaurant */
+}
+
+.menu-title {
+    text-align: center;
+    font-size: 3em;
+    color: #ff6600; /* Orange moderne */
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.category-section {
+    margin-bottom: 50px;
+}
+
+.category-title {
+    text-align: center;
+    color: #ffffff;
+    font-size: 2em;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ff6600;
+    padding-bottom: 10px;
+}
+
+.product-card {
+    background-color: #1a1a1a; /* Noir léger pour contraste */
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-image {
+    border-radius: 10px 10px 0 0;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-name {
+    font-size: 1.5em;
+    color: #ff6600;
+}
+
+.product-description {
+    font-size: 1em;
+    color: #cccccc;
+}
+
+.product-price {
+    font-size: 1.2em;
+    color: #ffffff;
+    font-weight: bold;
+}

@@ -45,10 +45,6 @@ class MainController extends AbstractController
         $posts4 = $this->repo->findBy([], ['createdAt' => 'DESC'], 2);
 
         return $this->render('main/index.html.twig', [
-            'posts' => $posts,
-            'posts2' => $posts2,
-            'posts3' => $posts3,
-            'posts4' => $posts4,
 
 
         ]);
