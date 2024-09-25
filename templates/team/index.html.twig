@@ -1,25 +1,61 @@
 {# templates/team/index.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <style>
+        /* Classe pour uniformiser la taille des images */
+        .same-size {
+            height: 400px; /* Vous pouvez ajuster cette hauteur en fonction du design souhaité */
+            width: 630; /* Maintient le ratio d'aspect de l'image */
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-<div class="container">
-    <h1>Présentation de l'Équipe et du Restaurant</h1>
-    
-    <section>
-        <h2>Notre Équipe</h2>
-        <p>Voici une présentation de notre équipe passionnée qui travaille avec dévouement pour vous offrir le meilleur service.</p>
-        <!-- Ajoutez ici des informations sur les membres de l'équipe -->
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Présentation du Restaurant et de l'Équipe</h1>
+
+    <!-- Section 1: Présentation du restaurant -->
+    <section class="row align-items-center mb-5">
+        <div class="col-md-6">
+            <h2>Bienvenue chez Babi Meal</h2>
+            <p>
+                Vivez un vrai voyage culinaire chez Babi Meal, un restaurant qui met l’Afrique de l’Ouest à l’honneur dans les assiettes.
+                Situé rue Salvador Allende à La Roche-sur-Yon, il vous accueille au déjeuner comme au dîner pour un moment de dégustation exotique.
+                Venez découvrir une cuisine maison aux saveurs épicées ou sucrées salées, dans une ambiance conviviale et enjouée.
+            </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="divers/images/resto4.jpg" alt="Restaurant Babi Meal" class="img-fluid rounded shadow-lg same-size" />
+        </div>
     </section>
-    
-    <section>
-        <h2>Notre concept</h2>
-        <p>Vivez un vrai voyage culinaire chez Babi Meal, un restaurant qui met l’Afrique de l’Ouest à l’honneur dans les assiettes.
-         Situé rue Salvador Allende à La Roche-sur-Yon, il vous accueille au déjeuner comme au dîner pour un moment de dégustation exotique.
-        Ivoirienne, réunionnaise ou créole, la cuisine est faite maison avec des saveurs épicées ou sucrées salées, mais toujours équilibrées.
-        Installez-vous dans une salle colorée où la musique participe à l’évasion, dans une ambiance conviviale et enjouée.
-        Les viandes et les poissons sont fumés avant d’être cuits en grillade au charbon de bois.
-        Généreux, copieux et surtout délicieux, chaque plat est préparé avec passion à travers des recettes africaines traditionnelles. </p>
-        <!-- Ajoutez ici des informations sur le restaurant -->
+
+    <!-- Section 2: Présentation de l'équipe -->
+    <section class="row align-items-center mb-5">
+        <div class="col-md-6 text-center">
+            <img src="divers/images/team.jpg" alt="Équipe Babi Meal" class="img-fluid rounded shadow-lg same-size" />
+        </div>
+        <div class="col-md-6">
+            <h2>Notre Équipe Passionnée</h2>
+            <p>
+                Chez Babi Meal, notre équipe est composée de chefs passionnés et de personnel dévoué, prêts à vous offrir une expérience unique.
+                Nous nous efforçons de vous proposer un service chaleureux, tout en partageant notre amour de la cuisine africaine.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 3: Philosophie culinaire -->
+    <section class="row align-items-center mb-5">
+        <div class="col-md-6">
+            <h2>Notre Philosophie Culinaire</h2>
+            <p>
+                Générosité, authenticité et passion sont les valeurs qui guident notre cuisine. Chaque plat est préparé à partir de recettes africaines traditionnelles,
+                avec des viandes et poissons fumés avant d’être cuits au charbon de bois. Savourez des mets copieux et délicieux, pensés pour émerveiller vos papilles.
+            </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="divers/images/philo.jpeg" alt="Philosophie Culinaire" class="img-fluid rounded shadow-lg same-size" />
+        </div>
     </section>
 </div>
 {% endblock %}

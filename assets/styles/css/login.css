@@ -1,0 +1,39 @@
+/* Style pour la checkbox avec hover similaire aux champs */
+.custom-checkbox:focus, .custom-checkbox:hover {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    border-color: #fff;
+}
+
+/* Couleur de la checkbox lorsqu'elle est cochée */
+.custom-checkbox:checked {
+    background-color: #f39112;
+    border-color: #f39112;
+}
+
+/* Hover blanc autour des champs */
+input.form-control:focus {
+    border-color: #fff;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Style pour aligner parfaitement les icônes avec les champs */
+.input-group-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px; /* Espacement entre l'icône et le champ */
+    padding: 0.375rem 0.75rem;
+}
+
+/* Ajustement du shadow et suppression de la bordure autour du formulaire */
+form.shadow-lg {
+    border: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Ajoute une ombre subtile */
+}
+
+/* Effet hover sur les boutons */
+.btn:hover {
+    background-color: #f39112;
+    color: #fff;
+    border-color: #f39112;
+}

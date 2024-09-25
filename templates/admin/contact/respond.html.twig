@@ -1,0 +1,90 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+    <style>
+        .response-container {
+            background-color: #000; /* Fond noir */
+            color: #fff; /* Texte blanc */
+            border-radius: 10px;
+            padding: 30px;
+            margin: 0 auto; /* Centrer le container */
+            width: 60%; /* Largeur du container */
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.6); /* Ombre avec touche orange */
+        }
+
+        h1 {
+            color: #ffa500; /* Orange pour le titre */
+            font-family: 'Helvetica', sans-serif;
+            text-align: center;
+            font-size: 24px; /* Agrandir la taille du titre */
+            margin-bottom: 40px;
+            border-bottom: 2px solid #ffa500;
+            padding-bottom: 10px;
+        }
+
+        .message-info p {
+            font-size: 18px; /* Taille de police plus grande */
+        }
+
+        .message-text {
+            background-color: #fff;
+            color: #000;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 5px solid #ffa500;
+        }
+
+        .response-form {
+            background-color: #1c1c1c; /* Fond légèrement différent pour contraste */
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        textarea {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ffa500;
+            width: 100%; /* Prendre toute la largeur */
+            padding: 15px;
+            font-size: 18px; /* Taille de police plus grande pour le champ de réponse */
+            border-radius: 8px;
+        }
+
+        .btn-submit {
+            background-color: #ffa500;
+            border: none;
+            padding: 12px 25px;
+            color: #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .btn-submit:hover {
+            background-color: #e69500; /* Légère variation au survol */
+        }
+    </style>
+
+    <div class="response-container">
+        <h1>Répondre à {{ contact.firstname }} {{ contact.lastname }}</h1>
+
+        <div class="message-info">
+            <p><strong>Email :</strong> {{ contact.email }}</p>
+            <p><strong>Sujet :</strong> {{ contact.subject }}</p>
+            <p><strong>Message reçu :</strong></p>
+            <div class="message-text">{{ contact.message }}</div>
+        </div>
+
+        <div class="response-form">
+            {{ form_start(form) }}
+                {{ form_row(form.response, {'attr': {'placeholder': 'Écrivez votre réponse ici...', 'rows': 10}}) }}
+                <button class="btn-submit">Envoyer la réponse</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

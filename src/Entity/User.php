@@ -183,6 +183,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    // Ajout de la méthode "getFullName" pour récupérer le nom et prénom de l'auteur de l'article dans le formulaire de création d'article du dashboard
+    public function getFullName(): string
+    {
+        return $this->firstname . ' ' . $this->lastname; // Assurez-vous que les propriétés existent
+    }
+
+
     public function getCity(): ?string
     {
         return $this->city;
@@ -292,5 +299,3 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 }
-
-

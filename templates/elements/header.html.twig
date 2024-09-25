@@ -31,9 +31,13 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_contact') }}" style="color: orange; font-weight: bold;">CONTACTEZ-NOUS</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('admin') }}" style="color: orange; font-weight: bold;">DASHBOARD</a>
-        </li>
+
+        <!-- Dashboard - Visible seulement pour les admins -->
+        {% if is_granted('ROLE_ADMIN') %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin') }}" style="color: orange; font-weight: bold;">DASHBOARD</a>
+          </li>
+        {% endif %}
       </ul>
 
       <!-- Social et utilisateur -->

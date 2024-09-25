@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Restaurant - La Carte{% endblock %}
+{% block title %}Restaurant Babimeal - La Carte{% endblock %}
 
 {% block body %}
 <div class="menu-container">
@@ -17,7 +17,7 @@
                                 {% if product.image %}
                                     <img src="{{ asset('divers/images/' ~ product.image) }}" class="card-img-top product-image" alt="{{ product.name }}">
                                 {% else %}
-                                    <img src="{{ asset('images/placeholder.png') }}" class="card-img-top product-image" alt="Image non disponible">
+                                    <img src="{{ asset('divers/images/placeholder.png') }}" class="card-img-top product-image" alt="Image non disponible">
                                 {% endif %}
                                 <div class="card-body">
                                     <h3 class="product-name">{{ product.name }}</h3>

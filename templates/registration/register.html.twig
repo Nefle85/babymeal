@@ -1,60 +1,102 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Register
+  Inscription
 {% endblock %}
 
 {% block body %}
-  <div class="container-fluid mt-5" style="margin-bottom:82px;">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3"></div>
+<div class="container-fluid">
+    <div class="container d-flex justify-content-center">
         <div class="col-md-6">
-          <h1>Register</h1>
-          <form method="Post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" class="p-4 shadow-lg rounded" style="background-color: rgba(0, 0, 0, 0.6); margin-top: 10px; margin-bottom: 10px;">
+
+                <h1 class="h3 mb-3 text-center" style="color: #fff;">Créer un compte</h1>
+
                 {{ form_errors(registrationForm) }}
 
                 {{ form_start(registrationForm) }}
 
-                    <div class="mb-3">{{ form_widget(registrationForm.firstname, { attr: { class: 'form-control', placeholder: 'Firstname' } }) }}</div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: #f39112; color: #fff;"><i class="fas fa-user"></i></span>
+                                </div>
+                                {{ form_widget(registrationForm.firstname, { attr: { class: 'form-control', placeholder: 'Prénom', style: 'border: 1px solid #000;' } }) }}
+                            </div>
+                        </div>
 
-                    <div class="mb-3">{{ form_widget(registrationForm.lastname, { attr: { class: 'form-control', placeholder: 'Lastname' } }) }}</div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: #f39112; color: #fff;"><i class="fas fa-user"></i></span>
+                                </div>
+                                {{ form_widget(registrationForm.lastname, { attr: { class: 'form-control', placeholder: 'Nom', style: 'border: 1px solid #000;' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="mb-3">{{ form_widget(registrationForm.email, { attr: { class: 'form-control', placeholder: 'Email' } }) }}</div>
-                   
-                    <div class="mb-3">{{ form_widget(registrationForm.city, { attr: { class: 'form-control', placeholder: 'City' } }) }}</div>
+                <div class="form-group">
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #f39112; color: #fff;"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        {{ form_widget(registrationForm.email, { attr: { class: 'form-control', placeholder: 'Email', style: 'border: 1px solid #000;' } }) }}
+                    </div>
+                </div>
 
-                    <div class="mb-3">{{ form_widget(registrationForm.avatar, { attr: { class: 'form-control' }, type: 'file', mapped: false }) }}</div>
-                    
-                    <div class="mb-3">{{ form_widget(registrationForm.country, { attr: { class: 'form-control', placeholder: 'Country' } }) }}</div>
+                <div class="form-group">
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #f39112; color: #fff;"><i class="fas fa-city"></i></span>
+                        </div>
+                        {{ form_widget(registrationForm.city, { attr: { class: 'form-control', placeholder: 'Ville', style: 'border: 1px solid #000;' } }) }}
+                    </div>
+                </div>
 
-                    <div class="mb-3">{{ form_widget(registrationForm.plainPassword, { label: 'Password', attr: { class: 'form-control', placeholder: 'Entrez votre mot de passe' } }) }}</div>
-                    
-                    <div class="mb-3">
-                        <label class="form-check-label">RGPD</label>&emsp;&emsp;
+                <div class="form-group">
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #f39112; color: #fff;"><i class="fas fa-globe"></i></span>
+                        </div>
+                        {{ form_widget(registrationForm.country, { attr: { class: 'form-control', placeholder: 'Pays', style: 'border: 1px solid #000;' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label style="color: white;">Avatar</label>
+                    {{ form_widget(registrationForm.avatar, { attr: { class: 'form-control-file text-white' }, type: 'file', mapped: false }) }}
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: #f39112; color: #fff;"><i class="fas fa-lock"></i></span>
+                        </div>
+                        {{ form_widget(registrationForm.plainPassword, { attr: { class: 'form-control', placeholder: 'Mot de passe', style: 'border: 1px solid #000;' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <div class="form-check">
+                        <label class="form-check-label" style="color: white;">J'accepte les termes et conditions</label>
                         {{ form_widget(registrationForm.agreeTerms, { attr: { class: 'form-check-input' } }) }}
                     </div>
+                </div>
 
-                    <div class="row mb-5">
-                        <div class="col-md-6">
-                            <button type="submit" class="btn btn-sm btn-success">Register</button>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="row">
-                            <div class="col-md-6">Déjà inscrit?</div>
-                            <div class="col-md-6">
-                                <a type="submit" class="btn btn-sm btn-primary" href="{{ path('app_login') }}">Login</a>
-                            </div>
-                            </div>
-                        </div>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <button class="btn" type="submit" style="background-color: white; color: black; border: 1px solid #000; font-weight: bold;" id="btnRegister">S'inscrire</button>
+                    <div class="d-flex align-items-center">
+                        <span style="color: #fff; margin-right: 15px">Déjà inscrit ?</span>
+                        <a class="btn btn-sm" href="{{ path('app_login') }}" style="background-color: #f39112; color: #fff; border: 1px solid #ff7f50;" id="btnLogin">Connexion</a>
                     </div>
+                </div>
+
                 {{ form_end(registrationForm) }}
             </form>
         </div>
-
-        <div class="col-md-3"></div>
-      </div>
     </div>
-  </div>
+</div>
 {% endblock %}

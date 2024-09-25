@@ -26,22 +26,48 @@ class ContactCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('name', 'Nom');
-        yield EmailField::new('email', 'Email');
+        yield TextField::new('lastname', 'Nom');
+        yield TextField::new('firstname', 'Prénom');
+        yield EmailField::new('email', 'Email')
+            ->setFormTypeOptions(['attr' => ['style' => 'color: orange;']]); // Couleur orange
+        yield EmailField::new('subject', 'Sujet')
+            ->setFormTypeOptions(['attr' => ['style' => 'color: orange;']]); // Couleur orange
         yield TextareaField::new('message', 'Message')->hideOnForm();
         yield DateTimeField::new('createdAt', 'Date d\'envoi')->hideOnForm();
         yield TextareaField::new('response', 'Réponse')->hideOnIndex();
-        yield BooleanField::new('isResponded', 'Répondu')->renderAsSwitch(false);
+        yield BooleanField::new('isResponded', 'Répondu')
+            ->renderAsSwitch(false)
+            ->setFormTypeOptions(['attr' => ['style' => 'color: orange;']]); // Couleur orange
     }
 
     public function configureActions(Actions $actions): Actions
     {
         $respond = Action::new('respond', 'Répondre', 'fa fa-reply')
-            ->linkToCrudAction('respondToContact');
+            ->linkToCrudAction('respondToContact')
+            ->setCssClass('btn-primary');
+
+        // Configurez l'action de suppression
+        $delete = Action::new('delete', 'Supprimer', 'fa fa-trash')
+            ->setCssClass('btn-warning text-white') // Style du bouton
+            ->setHtmlAttributes([
+                'data-confirm' => 'Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.', // Message de confirmation
+            ]);
 
         return $actions
             ->add(Crud::PAGE_INDEX, $respond)
-            ->add(Crud::PAGE_DETAIL, $respond);
+            ->add(Crud::PAGE_DETAIL, $respond)
+            // Met à jour l'action "delete" existante pour la page d'index
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
+                return $action
+                    ->setCssClass('btn-warning text-white') // Applique le style orange
+                    ->setHtmlAttributes([
+                        'data-confirm' => 'Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.', // Message de confirmation
+                    ]);
+            })
+            // Retrait des actions "add" et "edit"
+            ->remove(Crud::PAGE_INDEX, Action::NEW)  // Retire le bouton "Ajouter"
+            ->remove(Crud::PAGE_INDEX, Action::EDIT) // Retire le bouton "Éditer"
+            ->setPermission(Action::DELETE, 'ROLE_ADMIN'); // Assurez-vous que le rôle est correctement défini
     }
 
     public function respondToContact(Request $request, EntityManagerInterface $entityManager): Response

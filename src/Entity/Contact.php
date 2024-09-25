@@ -33,10 +33,16 @@ class Contact
     private ?string $response = null;
 
     #[ORM\Column]
-    private ?bool $isResponded = null;
+    private ?bool $isResponded = false; // Initialisation par défaut à false
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable(); // Initialisation automatique de createdAt
+        $this->isResponded = false; // Initialisation à false lors de la création de l'entité
+    }
 
     public function getId(): ?int
     {
@@ -120,7 +126,7 @@ class Contact
         return $this->isResponded;
     }
 
-    public function setResponded(bool $isResponded): static
+    public function setIsResponded(bool $isResponded): static
     {
         $this->isResponded = $isResponded;
 

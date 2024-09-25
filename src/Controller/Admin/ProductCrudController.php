@@ -29,15 +29,15 @@ class ProductCrudController extends AbstractCrudController
         return [
             IntegerField::new('id')->onlyOnIndex(),
 
-            TextField::new('name')->setColumns('col-md-6'),
+            TextField::new('name','Nom')->setColumns('col-md-6'),
 
-            TextField::new('details')->setColumns('col-md-6'),
+            TextField::new('details','Détails')->setColumns('col-md-6'),
 
             TextField::new('description')->setColumns('col-md-6'),
 
-            AssociationField::new('category')->setColumns('col-md-3'),
+            AssociationField::new('category','Catégorie')->setColumns('col-md-3'),
 
-            NumberField::new('price')->setColumns('col-md-3'), //Utilisation d'un champ de type NumberField car l'attribut "price" est de type décimal (numérique)
+            NumberField::new('price','Prix')->setColumns('col-md-3'), //Utilisation d'un champ de type NumberField car l'attribut "price" est de type décimal (numérique)
 
             $image = ImageField::new('image')
                 ->setUploadDir('public/divers/images')
@@ -50,9 +50,9 @@ class ProductCrudController extends AbstractCrudController
             ->setColumns('col-md-2 mt-4')
             ->setLabel('Disponible'),
             
-            DateTimeField::new('createdAt')->onlyOnIndex(),
+            DateTimeField::new('createdAt','Créé le')->onlyOnIndex(),
 
-            DateTimeField::new('updatedAt')->onlyOnIndex(),
+            DateTimeField::new('updatedAt','Modifié le')->onlyOnIndex(),
 
             // Note: 'createdBy' n'est pas inclus ici car il est souvent automatiquement géré
             // avec la relation utilisateur. Tu peux l'ajouter si nécessaire avec des permissions spécifiques.
@@ -63,7 +63,8 @@ class ProductCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Product') 
+            ->setPageTitle(Crud::PAGE_INDEX, 'Plats') // Changer le titre de la page
+            ->setEntityLabelInSingular('Plat') 
             ->setDefaultSort(['createdAt' => 'DESC'])
             ->setPaginatorPageSize(5)
         ;
