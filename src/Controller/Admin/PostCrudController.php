@@ -60,9 +60,12 @@ class PostCrudController extends AbstractCrudController
                 ->setSortable(false)
                 ->setFormTypeOption('required', false)->setColumns('col-md-2'),
             AssociationField::new('rubrik', 'Rubrique')->setColumns('col-md-4'),
+            
+            // Désactiver le champ "utilisateur" pour que la personne qui écrit l'article ne puisse pas en modifier l'auteur (elle-même)
             TextField::new('user', 'Auteur')
                 ->setDisabled()
                 ->setValue($user instanceof User ? $user->getFullName() : '') // Vérification ici
+
                 ->setColumns('col-md-6'),
             DateField::new('createdAt', 'Créé le')->onlyOnIndex(),
             BooleanField::new('isPublished')->setPermission('ROLE_ADMIN')->setColumns('col-md-1')->setLabel('Publié'),

@@ -1,0 +1,61 @@
+/* public/bundles/app/respond-form.css */
+
+.response-container {
+    background-color: #000; /* Fond noir */
+    color: #fff; /* Texte blanc */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.5); /* Ombre avec touche orange */
+}
+
+h1 {
+    color: #ffa500; /* Orange pour le titre */
+    font-family: 'Helvetica', sans-serif;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ffa500;
+    padding-bottom: 10px;
+}
+
+.response-container strong {
+    color: #ffa500; /* Orange pour les étiquettes importantes */
+}
+
+.message-text {
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    border-left: 5px solid #ffa500;
+}
+
+.response-form {
+    background-color: #1c1c1c; /* Fond légèrement différent pour contraste */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.btn-submit {
+    background-color: #ffa500;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 20px auto;
+}
+
+.btn-submit:hover {
+    background-color: #e69500; /* Légère variation au survol */
+}
+
+textarea {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #ffa500;
+}

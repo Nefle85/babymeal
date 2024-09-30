@@ -390,6 +390,25 @@ var tarteaucitron = {
                 });
             });
 
+            // multiple ga4 loaded/allowed, set gcm to granted
+            document.addEventListener('multiplegtag_loaded', function() {
+                window.tac_gtag('consent', 'update', {
+                    analytics_storage: 'granted'
+                });
+            });
+            document.addEventListener('multiplegtag_allowed', function() {
+                window.tac_gtag('consent', 'update', {
+                    analytics_storage: 'granted'
+                });
+            });
+
+            // multiple ga4 disallowed, update gcm
+            document.addEventListener('multiplegtag_disallowed', function() {
+                window.tac_gtag('consent', 'update', {
+                    analytics_storage: 'denied'
+                });
+            });
+
             // allow gtag/googleads by default if consent mode is on
             window.addEventListener('tac.root_available', function() {
                 if (typeof tarteaucitron_block !== 'undefined') {
@@ -1897,7 +1916,12 @@ var tarteaucitron = {
                 nbCurrent = 0,
                 html = '',
                 i,
-                status = document.cookie.indexOf(key + '=true');
+                status = document.cookie.indexOf(key + '=true'),
+                cookieLabel = "cookie";
+
+            if (tarteaucitron.getLanguage() === "de") {
+                cookieLabel = "Cookie";
+            }
 
             if (status >= 0 && nb === 0) {
                 html += tarteaucitron.lang.useNoCookie;
@@ -1915,7 +1939,7 @@ var tarteaucitron = {
                 }
 
                 if (nbCurrent > 0) {
-                    html += tarteaucitron.lang.useCookieCurrent + ' ' + nbCurrent + ' cookie';
+                    html += tarteaucitron.lang.useCookieCurrent + ' ' + nbCurrent + ' ' + cookieLabel;
                     if (nbCurrent > 1) {
                         html += 's';
                     }
@@ -1926,7 +1950,7 @@ var tarteaucitron = {
             } else if (nb === 0) {
                 html = tarteaucitron.lang.noCookie;
             } else {
-                html += tarteaucitron.lang.useCookie + ' ' + nb + ' cookie';
+                html += tarteaucitron.lang.useCookie + ' ' + nb + ' ' + cookieLabel;
                 if (nb > 1) {
                     html += 's';
                 }
@@ -2043,7 +2067,7 @@ var tarteaucitron = {
     "getLanguage": function () {
         "use strict";
 
-        var availableLanguages = 'ar,bg,ca,cn,cs,da,de,et,el,en,es,fi,fr,hr,hu,it,ja,kr,lb,lt,lv,nl,no,oc,pl,pt,ro,ru,se,sk,sv,tr,uk,vi,zh',
+        var availableLanguages = 'ar,bg,ca,cn,cs,da,de,et,el,en,es,fi,fr,hr,hu,it,ja,ko,lb,lt,lv,nl,no,oc,pl,pt,ro,ru,se,sk,sv,tr,uk,vi,zh',
             defaultLanguage = 'en';
 
         if (tarteaucitronForceLanguage !== '') {
@@ -2053,8 +2077,10 @@ var tarteaucitron = {
         }
 
         // get the html lang
-        if (availableLanguages.indexOf(document.documentElement.getAttribute("lang").substr(0, 2)) !== -1) {
-          return document.documentElement.getAttribute("lang").substr(0, 2);
+        if (document.documentElement.getAttribute("lang") !== undefined && document.documentElement.getAttribute("lang") !== null && document.documentElement.getAttribute("lang") !== "") {
+            if (availableLanguages.indexOf(document.documentElement.getAttribute("lang").substr(0, 2)) !== -1) {
+                return document.documentElement.getAttribute("lang").substr(0, 2);
+            }
         }
 
         if (!navigator) { return defaultLanguage; }

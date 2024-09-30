@@ -38,6 +38,78 @@ tarteaucitron.services.iframe = {
     }
 };
 
+// skaze
+tarteaucitron.services.skaze = {
+    "key": "skaze",
+    "type": "ads",
+    "name": "Skaze",
+    "uri": "https://www.skaze.com/fr/politique/politique-de-confidentialite/",
+    "needConsent": true,
+    "cookies": [],
+    "js": function () {
+        "use strict";
+
+        if (tarteaucitron.user.skazeIdentifier === undefined) {
+            return;
+        }
+
+        window.skaze = window.skaze || {};
+        tarteaucitron.addScript('https://events.sk.ht/' + tarteaucitron.user.skazeIdentifier + '/lib.js', '', function() {
+            skaze.cmd = skaze.cmd || [];
+            skaze.cmd.push(function() {
+                skaze.init({ siteIdentifier : tarteaucitron.user.skazeIdentifier });
+
+                if (typeof tarteaucitron.user.skazeMore === 'function') {
+                    tarteaucitron.user.skazeMore();
+                }
+            });
+        });
+    }
+};
+
+// dialoginsight
+tarteaucitron.services.dialoginsight = {
+    "key": "dialoginsight",
+    "type": "support",
+    "name": "Dialog Insight",
+    "uri": "https://www.dialoginsight.com/politique-de-confidentialite/",
+    "needConsent": true,
+    "cookies": [],
+    "js": function () {
+        "use strict";
+
+        if (tarteaucitron.user.dialogInsightId === undefined) {
+            return;
+        }
+
+        tarteaucitron.addScript('https://t.ofsys.com/js/Journey/1/' + tarteaucitron.user.dialogInsightId + '/DI.Journey-min.js');
+    }
+};
+
+// markerio
+tarteaucitron.services.markerio = {
+    "key": "markerio",
+    "type": "support",
+    "name": "Marker.io",
+    "uri": "https://marker.io/cookie-policy",
+    "needConsent": true,
+    "cookies": [],
+    "js": function () {
+        "use strict";
+
+        if (tarteaucitron.user.markerioProjectId === undefined) {
+            return;
+        }
+
+        window.markerConfig = {
+            project: tarteaucitron.user.markerioProjectId,
+            source: 'snippet'
+        };
+
+        !function(e,r,a){if(!e.__Marker){e.__Marker={};var t=[],n={__cs:t};["show","hide","isVisible","capture","cancelCapture","unload","reload","isExtensionInstalled","setReporter","setCustomData","on","off"].forEach(function(e){n[e]=function(){var r=Array.prototype.slice.call(arguments);r.unshift(e),t.push(r)}}),e.Marker=n;var s=r.createElement("script");s.async=1,s.src="https://edge.marker.io/latest/shim.js";var i=r.getElementsByTagName("script")[0];i.parentNode.insertBefore(s,i)}}(window,document);
+    }
+};
+
 // tolkaigenii
 tarteaucitron.services.tolkaigenii = {
     "key": "tolkaigenii",
@@ -2242,6 +2314,38 @@ tarteaucitron.services.calameo = {
     }
 };
 
+// calameolibrary
+tarteaucitron.services.calameolibrary = {
+    "key": "calameolibrary",
+    "type": "video",
+    "name": "Calameo Library",
+    "uri": "https://fr.calameo.com/privacy",
+    "needConsent": true,
+    "cookies": [],
+    "js": function () {
+        "use strict";
+        tarteaucitron.fallback(['calameolibrary-canvas'], function (x) {
+            var frame_title = tarteaucitron.getElemAttr(x, "title") || 'Calameo iframe',
+                id = tarteaucitron.getElemAttr(x, "data-id"),
+                width = tarteaucitron.getElemAttr(x, "width"),
+                height = tarteaucitron.getElemAttr(x, "height"),
+                url = '//v.calameo.com/library/?type=subscription&id=' + id,
+                allowfullscreen = tarteaucitron.getElemAttr(x, "allowfullscreen");
+
+            return '<iframe title="' + frame_title + '" src="' + url + '" width="' + width + '" height="' + height + '" scrolling="no" allowtransparency ' + (allowfullscreen == '0' ? '' : ' webkitallowfullscreen mozallowfullscreen allowfullscreen') + '></iframe>';
+        });
+    },
+    "fallback": function () {
+        "use strict";
+        var id = 'calameolibrary';
+        tarteaucitron.fallback(['calameolibrary-canvas'], function (elem) {
+            elem.style.width = elem.getAttribute('width') + 'px';
+            elem.style.height = elem.getAttribute('height') + 'px';
+            return tarteaucitron.engage(id);
+        });
+    }
+};
+
 // clicky
 tarteaucitron.services.clicky = {
     "key": "clicky",
@@ -3406,8 +3510,8 @@ tarteaucitron.services.firebase = {
             return;
         }
 
-        tarteaucitron.addScript('https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js', '', function () {
-            tarteaucitron.addScript('https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js', '', function () {
+        tarteaucitron.addScript('https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js', '', function () {
+            tarteaucitron.addScript('https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js', '', function () {
 
                 var firebaseConfig = {
                     apiKey: tarteaucitron.user.firebaseApiKey,
@@ -3850,7 +3954,7 @@ tarteaucitron.services.linkedin = {
     "key": "linkedin",
     "type": "social",
     "name": "Linkedin",
-    "uri": "https://www.linkedin.com/legal/cookie_policy",
+    "uri": "https://www.linkedin.com/legal/cookie-policy",
     "needConsent": true,
     "cookies": [],
     "js": function () {
@@ -5151,7 +5255,7 @@ tarteaucitron.services.linkedininsighttag = {
     "key": "linkedininsighttag",
     "type": "ads",
     "name": "Linkedin Insight",
-    "uri": "https://www.linkedin.com/legal/cookie_policy",
+    "uri": "https://www.linkedin.com/legal/cookie-policy",
     "needConsent": true,
     "cookies": ['li_fat_id'],
     "js": function () {

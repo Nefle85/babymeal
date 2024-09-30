@@ -26,7 +26,7 @@
           <a class="nav-link" href="{{ path('app_post') }}" style="color: orange; font-weight: bold;">L'ACTU</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_team') }}" style="color: orange; font-weight: bold;">L'EQUIPE</a>
+          <a class="nav-link" href="{{ path('app_team') }}" style="color: orange; font-weight: bold;">QUI-SOMMES-NOUS ?</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_contact') }}" style="color: orange; font-weight: bold;">CONTACTEZ-NOUS</a>
@@ -35,7 +35,7 @@
         <!-- Dashboard - Visible seulement pour les admins -->
         {% if is_granted('ROLE_ADMIN') %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('admin') }}" style="color: orange; font-weight: bold;">DASHBOARD</a>
+            <a class="nav-link" href="{{ path('admin') }}" style="color: orange; font-weight: bold;">ADMINISTRATION</a>
           </li>
         {% endif %}
       </ul>
